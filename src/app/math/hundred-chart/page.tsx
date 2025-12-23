@@ -5,17 +5,22 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { BackButton } from '@/components/ui/BackButton'
 import { SuccessFeedback } from '@/components/ui/SuccessFeedback'
 
-type PatternType = 'none' | 'even' | 'odd' | 'mult5' | 'mult10' | 'mult3'
+type PatternType = 'none' | 'odd' | 'mult2' | 'mult3' | 'mult4' | 'mult5' | 'mult6' | 'mult7' | 'mult8' | 'mult9' | 'mult10'
 type Mode = 'explore' | 'quiz'
 type Difficulty = 'easy' | 'medium' | 'hard'
 
 const patterns: { id: PatternType; label: string; emoji: string; check: (n: number) => boolean }[] = [
   { id: 'none', label: '无', emoji: '⬜', check: () => false },
-  { id: 'even', label: '偶数', emoji: '2️⃣', check: (n) => n % 2 === 0 },
-  { id: 'odd', label: '奇数', emoji: '1️⃣', check: (n) => n % 2 !== 0 },
-  { id: 'mult5', label: '5的倍数', emoji: '5️⃣', check: (n) => n % 5 === 0 },
-  { id: 'mult10', label: '10的倍数', emoji: '🔟', check: (n) => n % 10 === 0 },
+  { id: 'odd', label: '奇数', emoji: '🔹', check: (n) => n % 2 !== 0 },
+  { id: 'mult2', label: '2的倍数', emoji: '2️⃣', check: (n) => n % 2 === 0 },
   { id: 'mult3', label: '3的倍数', emoji: '3️⃣', check: (n) => n % 3 === 0 },
+  { id: 'mult4', label: '4的倍数', emoji: '4️⃣', check: (n) => n % 4 === 0 },
+  { id: 'mult5', label: '5的倍数', emoji: '5️⃣', check: (n) => n % 5 === 0 },
+  { id: 'mult6', label: '6的倍数', emoji: '6️⃣', check: (n) => n % 6 === 0 },
+  { id: 'mult7', label: '7的倍数', emoji: '7️⃣', check: (n) => n % 7 === 0 },
+  { id: 'mult8', label: '8的倍数', emoji: '8️⃣', check: (n) => n % 8 === 0 },
+  { id: 'mult9', label: '9的倍数', emoji: '9️⃣', check: (n) => n % 9 === 0 },
+  { id: 'mult10', label: '10的倍数', emoji: '🔟', check: (n) => n % 10 === 0 },
 ]
 
 const difficultyConfig: Record<Difficulty, { label: string; hiddenCount: number }> = {
