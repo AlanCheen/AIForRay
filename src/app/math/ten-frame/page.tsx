@@ -58,7 +58,7 @@ export default function TenFramePage() {
       setShowSuccess(true)
       setTimeout(() => {
         generateQuiz()
-      }, 1500)
+      }, 1200)
     }
   }
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { motion, Reorder, AnimatePresence } from 'framer-motion'
+import { motion, Reorder } from 'framer-motion'
 import { BackButton } from '@/components/ui/BackButton'
 import { SuccessFeedback } from '@/components/ui/SuccessFeedback'
 
@@ -62,7 +62,7 @@ export default function OrderPage() {
       setShowSuccess(true)
       setTimeout(() => {
         nextRound()
-      }, 1500)
+      }, 1200)
     }
   }
 
@@ -145,21 +145,6 @@ export default function OrderPage() {
             <span className="text-sm">大</span>
           </div>
         </div>
-
-        {/* 正确答案展示 */}
-        <AnimatePresence>
-          {isCorrect && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-center"
-            >
-              <span className="text-4xl">🎉</span>
-              <p className="text-xl font-bold text-candy-green mt-2">太棒了！</p>
-            </motion.div>
-          )}
-        </AnimatePresence>
 
         {/* 重新开始按钮 */}
         <motion.button

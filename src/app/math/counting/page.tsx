@@ -56,7 +56,7 @@ export default function CountingPage() {
       setShowSuccess(true)
       setTimeout(() => {
         nextQuestion()
-      }, 1500)
+      }, 1200)
     } else {
       setShowError(true)
       setTimeout(() => setShowError(false), 1000)
