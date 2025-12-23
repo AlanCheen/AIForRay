@@ -203,8 +203,8 @@ export default function HundredChartPage() {
 
       {/* 百数板 */}
       <div className="flex-1 flex items-center justify-center">
-        <div className="card-kid p-3 md:p-4 w-full max-w-lg">
-          <div className="grid grid-cols-10 gap-1">
+        <div className="card-kid p-1 sm:p-3 md:p-4 w-full max-w-lg">
+          <div className="grid grid-cols-10 gap-px sm:gap-1">
             {Array.from({ length: 100 }, (_, i) => i + 1).map((num) => {
               const highlighted = isHighlighted(num)
               const selected = selectedNumber === num
@@ -224,7 +224,7 @@ export default function HundredChartPage() {
                     whileTap={{ scale: 0.9 }}
                     onClick={() => handleHiddenClick(num)}
                     className={`
-                      aspect-square rounded-lg font-bold text-xs md:text-sm
+                      aspect-square rounded-lg font-bold text-[clamp(9px,2.5vw,14px)]
                       flex items-center justify-center transition-all
                       ${isSelectedHidden
                         ? 'bg-candy-pink text-white ring-2 ring-candy-pink ring-offset-2'
@@ -247,7 +247,7 @@ export default function HundredChartPage() {
                   whileTap={{ scale: 0.9 }}
                   onClick={() => handleNumberClick(num)}
                   className={`
-                    aspect-square rounded-lg font-bold text-xs md:text-sm
+                    aspect-square rounded-lg font-bold text-[clamp(9px,2.5vw,14px)]
                     flex items-center justify-center transition-all
                     ${selected
                       ? 'bg-candy-pink text-white shadow-lg ring-2 ring-candy-pink ring-offset-2'
