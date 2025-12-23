@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 
 const modules = [
+  // 英语模块
   {
     id: 'alphabet',
     title: '字母乐园',
@@ -20,6 +21,7 @@ const modules = [
     href: '/english/words',
     description: '看图学单词',
   },
+  // 数学基础模块
   {
     id: 'numbers',
     title: '数字世界',
@@ -35,6 +37,31 @@ const modules = [
     color: 'bg-candy-green',
     href: '/math/counting',
     description: '数一数有几个',
+  },
+  // 数感游戏模块
+  {
+    id: 'hundred-chart',
+    title: '百数板',
+    emoji: '📊',
+    color: 'bg-candy-yellow',
+    href: '/math/hundred-chart',
+    description: '探索 1-100 的规律',
+  },
+  {
+    id: 'ten-frame',
+    title: '十字框',
+    emoji: '🔲',
+    color: 'bg-candy-orange',
+    href: '/math/ten-frame',
+    description: '认识数量和凑十',
+  },
+  {
+    id: 'number-sense',
+    title: '数感游戏',
+    emoji: '🧠',
+    color: 'bg-candy-purple',
+    href: '/math/number-sense',
+    description: '比大小、排序、分解',
   },
 ]
 
@@ -84,7 +111,7 @@ export default function HomePage() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 flex-1 max-w-4xl mx-auto w-full"
+        className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5 flex-1 max-w-5xl mx-auto w-full content-start"
       >
         {modules.map((module) => (
           <motion.div key={module.id} variants={itemVariants}>

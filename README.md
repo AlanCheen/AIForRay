@@ -48,7 +48,7 @@ npm run build:gh
 
 推送到 `main` 分支后，GitHub Actions 会自动构建并部署到 GitHub Pages。
 
-访问地址：`https://[username].github.io/AIForRay`
+访问地址：`https://AlanCheen.github.io/AIForRay`
 
 ### Vercel（推荐）
 
