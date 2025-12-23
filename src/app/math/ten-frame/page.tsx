@@ -62,13 +62,20 @@ export default function TenFramePage() {
     }
   }
 
+  // Make10 mode state
+  const [make10Error, setMake10Error] = useState(false)
+
   const handleMake10Answer = (answer: number) => {
     if (answer === 10 - count) {
       setShowSuccess(true)
+      setMake10Error(false)
       setTimeout(() => {
         setCount(Math.floor(Math.random() * 9) + 1)
         setCurrentItem(items[Math.floor(Math.random() * items.length)])
       }, 1500)
+    } else {
+      setMake10Error(true)
+      setTimeout(() => setMake10Error(false), 1000)
     }
   }
 
@@ -261,20 +268,34 @@ export default function TenFramePage() {
               </p>
             </div>
 
-            {/* 答案选项 */}
-            <div className="grid grid-cols-5 gap-2 w-full max-w-md">
+            {/* 答案选项 - 使用更小的按钮 */}
+            <div className="grid grid-cols-5 gap-3 w-full max-w-sm">
               {Array.from({ length: 10 }, (_, i) => i + 1).map((n) => (
                 <motion.button
                   key={n}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={() => handleMake10Answer(n)}
-                  className="btn-kid bg-candy-orange text-white text-2xl"
+                  className="w-14 h-14 rounded-2xl bg-candy-orange text-white text-xl font-bold shadow-lg active:scale-95 transition-all"
                 >
                   {n}
                 </motion.button>
               ))}
             </div>
+
+            {/* 错误提示 */}
+            <AnimatePresence>
+              {make10Error && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  className="text-2xl font-bold text-red-500"
+                >
+                  再想想！{count} + ? = 10 💪
+                </motion.div>
+              )}
+            </AnimatePresence>
           </>
         )}
       </div>
