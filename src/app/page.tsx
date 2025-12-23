@@ -63,6 +63,14 @@ const modules = [
     href: '/math/number-sense',
     description: '比大小、排序、分解',
   },
+  {
+    id: 'number-blocks',
+    title: '数字积木',
+    emoji: '🧱',
+    color: 'bg-candy-pink',
+    href: '/math/number-blocks',
+    description: 'Numberblocks 风格展示',
+  },
 ]
 
 const containerVariants = {
