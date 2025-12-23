@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { motion, Reorder, AnimatePresence } from 'framer-motion'
 import { BackButton } from '@/components/ui/BackButton'
 import { SuccessFeedback } from '@/components/ui/SuccessFeedback'
@@ -27,6 +27,8 @@ export default function OrderPage() {
   const [showSuccess, setShowSuccess] = useState(false)
   const [isCorrect, setIsCorrect] = useState(false)
   const [score, setScore] = useState(0)
+  const [isDragging, setIsDragging] = useState(false)
+  const pendingOrderRef = useRef<number[]>([])
 
   const config = difficultyConfig[difficulty]
 
@@ -44,10 +46,17 @@ export default function OrderPage() {
     return items.every((n, i) => n === sorted[i])
   }
 
+  // 拖动过程中只更新顺序，不检查
   const handleReorder = (newOrder: number[]) => {
     setNumbers(newOrder)
+    pendingOrderRef.current = newOrder
+  }
+
+  // 拖动结束后才检查是否正确
+  const handleDragEnd = () => {
+    setIsDragging(false)
     
-    if (checkOrder(newOrder) && !isCorrect) {
+    if (checkOrder(pendingOrderRef.current) && !isCorrect) {
       setIsCorrect(true)
       setScore(s => s + 1)
       setShowSuccess(true)
@@ -100,28 +109,29 @@ export default function OrderPage() {
             axis="x"
             values={numbers}
             onReorder={handleReorder}
-            className="flex justify-center gap-3 flex-wrap"
+            className="flex justify-center items-center gap-3"
           >
             {numbers.map((num, index) => (
               <Reorder.Item
                 key={num}
                 value={num}
-                className="cursor-grab active:cursor-grabbing"
+                onDragStart={() => setIsDragging(true)}
+                onDragEnd={handleDragEnd}
+                dragConstraints={{ top: 0, bottom: 0 }}
+                dragElastic={0.1}
+                whileHover={{ scale: isDragging ? 1 : 1.05 }}
+                whileDrag={{ scale: 1.1, zIndex: 50 }}
+                className={`
+                  w-16 h-16 md:w-20 md:h-20 rounded-2xl
+                  flex items-center justify-center
+                  text-2xl md:text-3xl font-bold text-white shadow-lg
+                  cursor-grab active:cursor-grabbing select-none
+                  ${colors[index % colors.length]}
+                  ${isCorrect ? 'ring-4 ring-candy-green ring-offset-2' : ''}
+                  ${isDragging ? '' : 'transition-transform'}
+                `}
               >
-                <motion.div
-                  layout
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`
-                    w-16 h-16 md:w-20 md:h-20 rounded-2xl
-                    flex items-center justify-center
-                    text-2xl md:text-3xl font-bold text-white shadow-lg
-                    ${colors[index % colors.length]}
-                    ${isCorrect ? 'ring-4 ring-candy-green ring-offset-2' : ''}
-                  `}
-                >
-                  {num}
-                </motion.div>
+                {num}
               </Reorder.Item>
             ))}
           </Reorder.Group>
