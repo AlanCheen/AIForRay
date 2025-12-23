@@ -31,10 +31,10 @@ jobs:
         uses: actions/configure-pages@v4
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build with Next.js
-        run: npm run build:gh
+        run: npm run build
         env:
           DEPLOY_TARGET: github
 
