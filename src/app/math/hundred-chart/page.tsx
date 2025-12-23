@@ -86,7 +86,7 @@ export default function HundredChartPage() {
     if (!selectedHidden || !inputValue) return
     
     if (parseInt(inputValue) === selectedHidden) {
-      setAnsweredNumbers(prev => new Set([...prev, selectedHidden]))
+      setAnsweredNumbers(prev => new Set([...Array.from(prev), selectedHidden]))
       setSelectedHidden(null)
       setInputValue('')
       
