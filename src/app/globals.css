@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-candy-pink: #ff6b9d;
+  --color-candy-purple: #c084fc;
+  --color-candy-blue: #60a5fa;
+  --color-candy-green: #4ade80;
+  --color-candy-yellow: #facc15;
+  --color-candy-orange: #fb923c;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+
+html {
+  /* 防止 iOS Safari 缩放 */
+  touch-action: manipulation;
+}
+
+body {
+  font-family: 'Quicksand', system-ui, sans-serif;
+  background: linear-gradient(135deg, #fef3c7 0%, #fce7f3 50%, #ddd6fe 100%);
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* 大按钮样式 - 儿童友好 */
+@layer components {
+  .btn-kid {
+    @apply px-8 py-4 rounded-3xl font-bold text-xl
+           shadow-lg active:scale-95 transition-all duration-150
+           min-w-[120px] min-h-[60px]
+           flex items-center justify-center gap-3;
+  }
+
+  .btn-candy-pink {
+    @apply btn-kid bg-candy-pink text-white hover:bg-pink-400;
+  }
+
+  .btn-candy-blue {
+    @apply btn-kid bg-candy-blue text-white hover:bg-blue-400;
+  }
+
+  .btn-candy-green {
+    @apply btn-kid bg-candy-green text-white hover:bg-green-400;
+  }
+
+  .btn-candy-yellow {
+    @apply btn-kid bg-candy-yellow text-gray-800 hover:bg-yellow-300;
+  }
+
+  .btn-candy-purple {
+    @apply btn-kid bg-candy-purple text-white hover:bg-purple-400;
+  }
+
+  .btn-candy-orange {
+    @apply btn-kid bg-candy-orange text-white hover:bg-orange-400;
+  }
+
+  /* 卡片样式 */
+  .card-kid {
+    @apply bg-white/80 backdrop-blur-sm rounded-3xl p-6 shadow-xl
+           border-4 border-white/50;
+  }
+
+  /* 导航图标按钮 */
+  .nav-icon {
+    @apply w-20 h-20 rounded-2xl flex items-center justify-center
+           text-4xl shadow-lg active:scale-90 transition-transform;
+  }
+}
+
+/* 横屏提示（可选） */
+@media (orientation: portrait) and (max-width: 768px) {
+  .landscape-hint {
+    display: flex;
+  }
+}
+
+/* 触控优化 */
+button, a, [role="button"] {
+  min-width: 48px;
+  min-height: 48px;
+}
+
+/* 动画类 */
+.animate-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 成功反馈动画 */
+.success-burst {
+  animation: burst 0.5s ease-out;
+}
+
+@keyframes burst {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
