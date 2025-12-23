@@ -39,13 +39,11 @@ export default function DecomposePage() {
     setPart1(p1)
     setSelectedPart2(null)
     
-    // 生成选项
-    const opts = new Set<number>([correctAnswer])
-    while (opts.size < 4) {
-      const opt = Math.max(0, Math.min(10, correctAnswer + Math.floor(Math.random() * 5) - 2))
-      opts.add(opt)
-    }
-    setOptions(Array.from(opts).sort(() => Math.random() - 0.5))
+    // 生成选项 - 从 0-10 中选择干扰项
+    const allOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].filter(n => n !== correctAnswer)
+    const shuffled = allOptions.sort(() => Math.random() - 0.5)
+    const wrongOptions = shuffled.slice(0, 3)
+    setOptions([correctAnswer, ...wrongOptions].sort(() => Math.random() - 0.5))
   }, [])
 
   useEffect(() => {

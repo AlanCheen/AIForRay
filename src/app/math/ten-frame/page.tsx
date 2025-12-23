@@ -29,13 +29,14 @@ export default function TenFramePage() {
     setShowFrame(true)
     setAnswered(false)
     
-    // Generate options
-    const opts = new Set<number>([newCount])
-    while (opts.size < 4) {
-      const opt = Math.max(1, Math.min(10, newCount + Math.floor(Math.random() * 5) - 2))
-      opts.add(opt)
-    }
-    setOptions(Array.from(opts).sort(() => Math.random() - 0.5))
+    // Generate options - 确保有足够的选项可选
+    const allOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].filter(n => n !== newCount)
+    // 随机选择 3 个干扰项
+    const shuffled = allOptions.sort(() => Math.random() - 0.5)
+    const wrongOptions = shuffled.slice(0, 3)
+    // 合并正确答案和干扰项，然后打乱
+    const opts = [newCount, ...wrongOptions].sort(() => Math.random() - 0.5)
+    setOptions(opts)
     
     // Hide after 2 seconds
     setTimeout(() => setShowFrame(false), 2000)

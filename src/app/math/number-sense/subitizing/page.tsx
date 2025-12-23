@@ -56,13 +56,11 @@ export default function SubitizingPage() {
     setEmoji(newEmoji)
     setPhase('showing')
     
-    // 生成选项
-    const opts = new Set<number>([newCount])
-    while (opts.size < 4) {
-      const opt = Math.max(1, Math.min(10, newCount + Math.floor(Math.random() * 5) - 2))
-      opts.add(opt)
-    }
-    setOptions(Array.from(opts).sort(() => Math.random() - 0.5))
+    // 生成选项 - 从 1-9 中选择干扰项
+    const allOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9].filter(n => n !== newCount)
+    const shuffled = allOptions.sort(() => Math.random() - 0.5)
+    const wrongOptions = shuffled.slice(0, 3)
+    setOptions([newCount, ...wrongOptions].sort(() => Math.random() - 0.5))
     
     // 显示时间后隐藏
     setTimeout(() => {
